@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#121316">
+  <title>Твій план TikTok для Європи</title>
+
+  <!-- Meta Pixel: заміни 1826437471820230 на свій Dataset / Pixel ID -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
+      s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s);
+    }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','1826437471820230');
+    fbq('track','PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1826437471820230&ev=PageView&noscript=1" alt="">
+  </noscript>
+
+  <style>
+    :root {
+      --bg: #121316;
+      --card: #1c1d22;
+      --card-hover: #25272d;
+      --neon: #39ff14;
+      --white: #f7f8f7;
+      --muted: #c0c3c6;
+      --border: #383a40;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    body {
+      min-height: 100svh;
+      color: var(--white);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "SF Pro Display",
+        "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, a { font: inherit; -webkit-tap-highlight-color: transparent; }
+
+    .app {
+      width: min(100%, 480px);
+      height: 100svh;
+      min-height: 0;
+      margin: 0 auto;
+      padding:
+        max(10px, env(safe-area-inset-top))
+        18px
+        max(10px, env(safe-area-inset-bottom));
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% -18%, rgba(57,255,20,.075), transparent 48%),
+        var(--bg);
+    }
+
+    .topbar {
+      flex: 0 0 auto;
+      min-height: 15px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      color: var(--neon);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .14em;
+    }
+
+    .progress {
+      display: none;
+      width: 88px;
+      height: 4px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #33353a;
+    }
+
+    .progress.visible { display: block; }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--neon);
+      transition: width .28s ease;
+    }
+
+    main {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .screen {
+      display: none;
+      width: 100%;
+      max-height: 100%;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(9px, 1.8vh, 16px);
+      opacity: 0;
+      transform: translateY(7px);
+    }
+
+    .screen.active {
+      display: flex;
+      animation: appear .25s ease forwards;
+    }
+
+    @keyframes appear {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--neon);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    h1, h2 {
+      margin: 0;
+      color: var(--white);
+      font-size: clamp(24px, 6.6vw, 33px);
+      line-height: 1.1;
+      letter-spacing: -.04em;
+      font-weight: 850;
+    }
+
+    h1 { font-size: clamp(25px, 6.9vw, 34px); }
+
+    .accent { color: var(--neon); }
+
+    .copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(13px, 3.7vw, 16px);
+      line-height: 1.4;
+    }
+
+    .benefits {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .benefits li {
+      display: grid;
+      grid-template-columns: 23px 1fr;
+      gap: 7px;
+      align-items: start;
+      color: #e7e8e9;
+      font-size: clamp(12px, 3.5vw, 14px);
+      line-height: 1.3;
+    }
+
+    .gift {
+      padding: 11px 12px;
+      border: 1px solid rgba(57,255,20,.55);
+      border-radius: 12px;
+      background: rgba(57,255,20,.055);
+      color: #eef5ec;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .gift strong { color: var(--neon); }
+
+    .choices, .button-stack {
+      display: grid;
+      gap: 9px;
+    }
+
+    .choice {
+      width: 100%;
+      min-height: 56px;
+      padding: 11px 13px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--card);
+      color: var(--white);
+      text-align: left;
+      font-size: clamp(13px, 3.7vw, 15px);
+      line-height: 1.25;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .16s ease, border-color .16s ease, transform .14s ease;
+    }
+
+    .choice::after {
+      content: "›";
+      flex: 0 0 auto;
+      color: var(--neon);
+      font-size: 25px;
+      line-height: 1;
+    }
+
+    .choice:hover, .choice:focus-visible {
+      outline: none;
+      border-color: var(--neon);
+      background: var(--card-hover);
+    }
+
+    .primary, .messenger, .download {
+      width: 100%;
+      min-height: 56px;
+      padding: 12px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 14px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 15px;
+      line-height: 1.2;
+      font-weight: 850;
+      cursor: pointer;
+      transition: transform .14s ease, filter .16s ease;
+    }
+
+    .primary {
+      background: var(--neon);
+      color: #080d07;
+      box-shadow: 0 0 20px rgba(57,255,20,.13);
+    }
+
+    .messenger { color: #fff; }
+    .telegram { background: #24A1DE; }
+    .whatsapp { background: #25D366; color: #07150b; }
+    .download { background: #fff; color: #121316; }
+
+    .primary:active, .choice:active, .messenger:active, .download:active {
+      transform: scale(.985);
+    }
+
+    .success-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(57,255,20,.5);
+      border-radius: 50%;
+      background: rgba(57,255,20,.08);
+      color: var(--neon);
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .note {
+      margin: 0;
+      color: #92979b;
+      text-align: center;
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+    .footer {
+      flex: 0 0 auto;
+      padding-top: 7px;
+      color: #686d73;
+      text-align: center;
+      font-size: 9px;
+      letter-spacing: .1em;
+    }
+
+    @media (max-height: 720px) {
+      .screen { gap: 8px; }
+      .choice { min-height: 50px; padding: 9px 11px; }
+      .primary, .messenger, .download { min-height: 50px; }
+      .benefits { gap: 6px; }
+      .gift { padding: 9px 10px; }
+    }
+
+    @media (max-height: 640px) {
+      .app { padding-top: max(6px, env(safe-area-inset-top)); padding-bottom: max(6px, env(safe-area-inset-bottom)); }
+      .topbar { margin-bottom: 4px; }
+      .screen { gap: 6px; }
+      h1 { font-size: 23px; }
+      h2 { font-size: 22px; }
+      .copy { font-size: 12px; }
+      .benefits li { font-size: 11px; }
+      .choice { min-height: 44px; padding: 7px 9px; font-size: 12px; }
+      .primary, .messenger, .download { min-height: 44px; font-size: 13px; }
+      .gift { padding: 7px 9px; font-size: 11px; }
+      .footer { padding-top: 4px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <header class="topbar">
+      <span class="brand">TIKTOK · EUROPE</span>
+      <div class="progress" id="progress" aria-label="Прогрес квізу">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Екран 1: старт -->
+      <section class="screen active" id="screen1" aria-labelledby="title1">
+        <p class="eyebrow">Твій старт у TikTok</p>
+        <h1 id="title1">Як отримувати клієнтів та партнерів з TikTok у Європі. <span class="accent">Без грошей на рекламу та знання мови.</span></h1>
+        <p class="copy">Покроковий план для тих, хто продає свої товари, послуги або розвиває мережевий бізнес (МЛМ).</p>
+        <ul class="benefits">
+          <li><span>⚡</span><span>Для новачків: ідеально як підробіток до найму.</span></li>
+          <li><span>⚙️</span><span>0% на рекламу: TikTok сам знайде покупців у вашому місті.</span></li>
+          <li><span>👥</span><span>Супер просто: дам готові тексти, які треба просто зачитати.</span></li>
+        </ul>
+        <div class="gift">🎁 <strong>БОНУС:</strong> Мій відео-урок «Як налаштувати TikTok, щоб клієнти купували у вас самі».</div>
+        <button class="primary" type="button" onclick="showScreen(2)">Отримати мій план та відео-урок ➡️</button>
+      </section>
+
+      <!-- Екран 2: мета -->
+      <section class="screen" id="screen2" aria-labelledby="title2">
+        <p class="eyebrow">Питання 1 з 3</p>
+        <h2 id="title2">Яка твоя головна мета в Європі зараз?</h2>
+        <div class="choices">
+          <button class="choice" type="button" data-answer="goal" data-value="Запустити додатковий дохід у євро">Запустити додатковий дохід у євро 💶</button>
+          <button class="choice" type="button" data-answer="goal" data-value="Розвивати мережевий бізнес / МЛМ">Розвивати мережевий бізнес / МЛМ 🚀</button>
+          <button class="choice" type="button" data-answer="goal" data-value="Продавати свої послуги або товари">Продавати свої послуги або товари 📦</button>
+          <button class="choice" type="button" data-answer="goal" data-value="Піти з найму/заробітків на фріланс">Піти з найму/заробітків на фріланс 💻</button>
+        </div>
+      </section>
+
+      <!-- Екран 3: проблема -->
+      <section class="screen" id="screen3" aria-labelledby="title3">
+        <p class="eyebrow">Питання 2 з 3</p>
+        <h2 id="title3">Що найбільше заважає тобі заробляти з TikTok сьогодні?</h2>
+        <div class="choices">
+          <button class="choice" type="button" data-answer="barrier" data-value="Не вмію перетворювати перегляди на гроші">Не вмію перетворювати перегляди на гроші 💸</button>
+          <button class="choice" type="button" data-answer="barrier" data-value="Боюся камери і не знаю, що знімати">Боюся камери і не знаю, що знімати 🛑</button>
+          <button class="choice" type="button" data-answer="barrier" data-value="Публікую хаотично, але заявок нуль">Публікую хаотично, але заявок нуль ⏰</button>
+          <button class="choice" type="button" data-answer="barrier" data-value="Немає профілю, хочу почати з нуля">Немає профілю, хочу почати з нуля 🆕</button>
+        </div>
+      </section>
+
+      <!-- Екран 4: кваліфікаційне питання -->
+      <section class="screen" id="screen4" aria-labelledby="title4">
+        <p class="eyebrow">Питання 3 з 3</p>
+        <h2 id="title4">На безкоштовній консультації я дам тобі готовий план. Що для тебе важливо далі?</h2>
+        <div class="choices">
+          <button class="choice" type="button" data-route="lead" data-value="Хочу пройти навчання">Я налаштований(а) серйозно. Хочу пройти навчання з тобою, щоб отримати результат швидше 🚀</button>
+          <button class="choice" type="button" data-route="lead" data-value="Оплата частинами">Мені потрібна допомога та готові кроки, але з оплатою частинами або в розстрочку 💳</button>
+          <button class="choice" type="button" data-route="free" data-value="Лише безкоштовні поради">Я хочу спробувати сам(а) і шукаю лише безкоштовні поради та тексти 📖</button>
+        </div>
+      </section>
+
+      <!-- Екран 5: цільові ліди -->
+      <section class="screen" id="screen5" aria-labelledby="title5">
+        <div class="success-icon" aria-hidden="true">✓</div>
+        <p class="eyebrow">Готово</p>
+        <h2 id="title5">Твій план та відео-урок вже готові!</h2>
+        <p class="copy">Обери месенджер нижче. Відео-урок відкриється автоматично після першого повідомлення.</p>
+        <div class="button-stack">
+          <a class="messenger telegram" id="telegramButton" href="https://t.me/vmendaliuk?text=%D0%9F%D1%80%D0%B8%D0%B2%D1%96%D1%82.%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BE%D1%82%D1%80%D0%B8%D0%BC%D0%B0%D1%82%D0%B8%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D1%96%D1%8E%20%D0%BF%D0%BE%20TikTok%20%D1%96%20%D0%B1%D0%B5%D0%B7%D0%BA%D0%BE%D1%88%D1%82%D0%BE%D0%B2%D0%BD%D0%B8%D0%B9%20%D0%B2%D1%96%D0%B4%D0%B5%D0%BE%D1%83%D1%80%D0%BE%D0%BA" onclick="trackLead(event)">Отримати урок у Telegram ✈️</a>
+          <a class="messenger whatsapp" id="whatsappButton" href="https://wa.me/48735184537?text=%D0%9F%D1%80%D0%B8%D0%B2%D1%96%D1%82.%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BE%D1%82%D1%80%D0%B8%D0%BC%D0%B0%D1%82%D0%B8%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D1%96%D1%8E%20%D0%BF%D0%BE%20TikTok%20%D1%96%20%D0%B1%D0%B5%D0%B7%D0%BA%D0%BE%D1%88%D1%82%D0%BE%D0%B2%D0%BD%D0%B8%D0%B9%20%D0%B2%D1%96%D0%B4%D0%B5%D0%BE%D1%83%D1%80%D0%BE%D0%BA" onclick="trackLead(event)">Отримати урок у WhatsApp 💬</a>
+        </div>
+      </section>
+
+      <!-- Екран 6: безкоштовний матеріал, без Lead -->
+      <section class="screen" id="screen6" aria-labelledby="title6">
+        <p class="eyebrow">Подарунок для тебе</p>
+        <h2 id="title6">Твій бонус тут!</h2>
+        <p class="copy">Мої живі розбори зараз закриті. Але я дарую тобі свій урок по TikTok. Почни самостійно!</p>
+        <a class="download" href="https://t.me/+ivxcKAd90plkOTE0" target="_blank" rel="noopener">Перейти до безкоштовних порад 🎁</a>
+      </section>
+    </main>
+
+    <footer class="footer">ПРОСТИЙ ПЛАН · ПЕРШИЙ КРОК</footer>
+  </div>
+
+  <script>
+    const answers = {
+      goal: '',
+      barrier: '',
+      filter: ''
+    };
+
+    const progressValues = {
+      1: null,
+      2: 33,
+      3: 66,
+      4: 99,
+      5: null,
+      6: null
+    };
+
+    function showScreen(number) {
+      document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+        screen.setAttribute('aria-hidden', 'true');
+      });
+
+      const nextScreen = document.getElementById(`screen${number}`);
+      if (!nextScreen) return;
+
+      nextScreen.classList.add('active');
+      nextScreen.setAttribute('aria-hidden', 'false');
+
+      const progress = document.getElementById('progress');
+      const fill = document.getElementById('progressFill');
+      const value = progressValues[number];
+
+      if (value === null) {
+        progress.classList.remove('visible');
+      } else {
+        progress.classList.add('visible');
+        fill.style.width = `${value}%`;
+      }
+    }
+
+    // На екранах 2 і 3 відповідь одразу відкриває наступне питання.
+    document.querySelectorAll('[data-answer]').forEach(button => {
+      button.addEventListener('click', () => {
+        const key = button.dataset.answer;
+        answers[key] = button.dataset.value;
+        showScreen(key === 'goal' ? 3 : 4);
+      });
+    });
+
+    // На екрані 4: перші дві відповіді ведуть до екрана 5, третя — до екрана 6.
+    document.querySelectorAll('[data-route]').forEach(button => {
+      button.addEventListener('click', () => {
+        answers.filter = button.dataset.value;
+
+        if (button.dataset.route === 'lead') {
+          showScreen(5);
+        } else {
+          // Безкоштовний маршрут: подія Lead тут не викликається.
+          showScreen(6);
+        }
+      });
+    });
+
+    // Викликається тільки при кліку на Telegram або WhatsApp.
+    function trackLead(event) {
+      event.preventDefault();
+      const destination = event.currentTarget.href;
+
+      if (typeof window.fbq === 'function') {
+        window.fbq('track', 'Lead');
+      }
+
+      // Переходимо після короткої паузи, щоб Pixel встиг почати передачу Lead.
+      window.setTimeout(() => {
+        window.location.href = destination;
+      }, 300);
+    }
+
+    // Початкові значення доступності екранів.
+    document.querySelectorAll('.screen').forEach((screen, index) => {
+      screen.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
+    });
+  </script>
+</body>
+</html>
