@@ -418,7 +418,7 @@
           <li><span>👥</span><span>Супер просто: дам готові тексти, які треба просто зачитати.</span></li>
         </ul>
         <div class="gift">🎁 <strong>БОНУС:</strong> Мій відео-урок «Як налаштувати TikTok, щоб клієнти купували у вас самі».</div>
-        <button class="primary" type="button" onclick="showScreen(2)">Отримати мій план та відео-урок ➡️</button>
+        <button class="primary" type="button" onclick="step('QuizStart'); showScreen(2)">Отримати мій план та відео-урок ➡️</button>
       </section>
 
       <!-- Екран 2: мета -->
@@ -504,6 +504,14 @@
     const answers = { goal: '', barrier: '', filter: '' };
     const eventId = 'm' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 
+    // Кроки квізу в піксель (лише для аналітики; оптимізація реклами — тільки на Lead)
+    const sentSteps = {};
+    function step(name, data) {
+      if (sentSteps[name]) return;
+      sentSteps[name] = true;
+      try { if (typeof window.fbq === 'function') window.fbq('trackCustom', name, data || {}, { eventID: eventId + '_' + name }); } catch (e) {}
+    }
+
     const qs = new URLSearchParams(location.search);
     const utm = {};
     ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'].forEach(k => {
@@ -513,6 +521,7 @@
     const progressValues = { 1: null, 2: 33, 3: 66, 4: 99, 5: null, 6: null, 7: null };
 
     function showScreen(number) {
+      if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
       document.querySelectorAll('.screen').forEach(screen => {
         screen.classList.remove('active');
         screen.setAttribute('aria-hidden', 'true');
@@ -540,6 +549,8 @@
       button.addEventListener('click', () => {
         const key = button.dataset.answer;
         answers[key] = button.dataset.value;
+        if (key === 'goal') step('QuizQ1', { goal: answers.goal });
+        else step('QuizQ2', { goal: answers.goal, barrier: answers.barrier });
         showScreen(key === 'goal' ? 3 : 4);
       });
     });
@@ -548,9 +559,11 @@
       button.addEventListener('click', () => {
         answers.filter = button.dataset.value;
         if (button.dataset.route === 'lead') {
+          step('QuizQualified', { goal: answers.goal, barrier: answers.barrier, filter: answers.filter });
           showScreen(5);
           setTimeout(() => document.getElementById('name').focus(), 300);
         } else {
+          step('QuizFree', { goal: answers.goal, barrier: answers.barrier });
           showScreen(6); // безкоштовний маршрут: Lead не викликається
         }
       });
@@ -584,7 +597,7 @@
     const msgEl = document.getElementById('formMsg');
     const btn = document.getElementById('submitBtn');
 
-    [nameEl, phoneEl].forEach(el => el.addEventListener('input', () => el.classList.remove('err')));
+    [nameEl, phoneEl].forEach(el => el.addEventListener('input', () => { el.classList.remove('err'); step('FormStart'); }));
 
     function cookie(n) {
       const m = document.cookie.match('(?:^|; )' + n + '=([^;]*)');
