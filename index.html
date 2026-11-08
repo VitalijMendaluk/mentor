@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#121316">
   <title>Твій план TikTok для Європи</title>
 
-  <!-- Meta Pixel: заміни 1826437471820230 на свій Dataset / Pixel ID -->
+  <!-- Meta Pixel -->
   <script>
     !function(f,b,e,v,n,t,s){
       if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -32,6 +32,7 @@
       --white: #f7f8f7;
       --muted: #c0c3c6;
       --border: #383a40;
+      --err: #ff6b5b;
     }
 
     * { box-sizing: border-box; }
@@ -52,7 +53,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    button, a { font: inherit; -webkit-tap-highlight-color: transparent; }
+    button, a, input, select { font: inherit; -webkit-tap-highlight-color: transparent; }
 
     .app {
       width: min(100%, 480px);
@@ -233,7 +234,7 @@
       background: var(--card-hover);
     }
 
-    .primary, .messenger, .download {
+    .primary, .download {
       width: 100%;
       min-height: 56px;
       padding: 12px 15px;
@@ -248,7 +249,7 @@
       line-height: 1.2;
       font-weight: 850;
       cursor: pointer;
-      transition: transform .14s ease, filter .16s ease;
+      transition: transform .14s ease, filter .16s ease, opacity .16s ease;
     }
 
     .primary {
@@ -257,14 +258,50 @@
       box-shadow: 0 0 20px rgba(57,255,20,.13);
     }
 
-    .messenger { color: #fff; }
-    .telegram { background: #24A1DE; }
-    .whatsapp { background: #25D366; color: #07150b; }
+    .primary[disabled] { opacity: .6; }
+
     .download { background: #fff; color: #121316; }
 
-    .primary:active, .choice:active, .messenger:active, .download:active {
+    .primary:active, .choice:active, .download:active {
       transform: scale(.985);
     }
+
+    /* ---------- форма ---------- */
+    .form { display: grid; gap: 9px; }
+
+    .field {
+      width: 100%;
+      height: 54px;
+      padding: 0 14px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--card);
+      color: var(--white);
+      font-size: 16px;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: border-color .16s ease;
+    }
+
+    .field::placeholder { color: #8e9398; }
+    .field:focus { border-color: var(--neon); }
+    .field.err { border-color: var(--err); }
+
+    .row { display: flex; gap: 8px; }
+    .row .code { flex: 0 0 104px; padding-right: 26px;
+      background: var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5' fill='none' stroke='%2339ff14' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") right 8px center/16px no-repeat; }
+
+    .msg {
+      min-height: 14px;
+      margin: 0;
+      color: var(--err);
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .hp { position: absolute; left: -9999px; opacity: 0; }
 
     .success-icon {
       width: 46px;
@@ -279,11 +316,42 @@
       font-weight: 900;
     }
 
+    .steps {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .steps li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 8px;
+      align-items: start;
+      color: #e7e8e9;
+      font-size: clamp(12px, 3.5vw, 14px);
+      line-height: 1.35;
+    }
+
+    .steps i {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--neon);
+      color: #080d07;
+      font-style: normal;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
     .note {
       margin: 0;
       color: #92979b;
       text-align: center;
-      font-size: 10px;
+      font-size: 11px;
       line-height: 1.35;
     }
 
@@ -299,7 +367,8 @@
     @media (max-height: 720px) {
       .screen { gap: 8px; }
       .choice { min-height: 50px; padding: 9px 11px; }
-      .primary, .messenger, .download { min-height: 50px; }
+      .primary, .download { min-height: 50px; }
+      .field { height: 50px; }
       .benefits { gap: 6px; }
       .gift { padding: 9px 10px; }
     }
@@ -313,7 +382,8 @@
       .copy { font-size: 12px; }
       .benefits li { font-size: 11px; }
       .choice { min-height: 44px; padding: 7px 9px; font-size: 12px; }
-      .primary, .messenger, .download { min-height: 44px; font-size: 13px; }
+      .primary, .download { min-height: 44px; font-size: 13px; }
+      .field { height: 46px; }
       .gift { padding: 7px 9px; font-size: 11px; }
       .footer { padding-top: 4px; }
     }
@@ -386,16 +456,23 @@
         </div>
       </section>
 
-      <!-- Екран 5: цільові ліди -->
+      <!-- Екран 5: форма (тільки цільові) -->
       <section class="screen" id="screen5" aria-labelledby="title5">
         <div class="success-icon" aria-hidden="true">✓</div>
         <p class="eyebrow">Готово</p>
         <h2 id="title5">Твій план та відео-урок вже готові!</h2>
-        <p class="copy">Обери месенджер нижче. Відео-урок відкриється автоматично після першого повідомлення.</p>
-        <div class="button-stack">
-          <a class="messenger telegram" id="telegramButton" href="https://t.me/vmendaliuk?text=%D0%9F%D1%80%D0%B8%D0%B2%D1%96%D1%82.%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BE%D1%82%D1%80%D0%B8%D0%BC%D0%B0%D1%82%D0%B8%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D1%96%D1%8E%20%D0%BF%D0%BE%20TikTok%20%D1%96%20%D0%B1%D0%B5%D0%B7%D0%BA%D0%BE%D1%88%D1%82%D0%BE%D0%B2%D0%BD%D0%B8%D0%B9%20%D0%B2%D1%96%D0%B4%D0%B5%D0%BE%D1%83%D1%80%D0%BE%D0%BA" onclick="trackLead(event)">Отримати урок у Telegram ✈️</a>
-          <a class="messenger whatsapp" id="whatsappButton" href="https://wa.me/48735184537?text=%D0%9F%D1%80%D0%B8%D0%B2%D1%96%D1%82.%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BE%D1%82%D1%80%D0%B8%D0%BC%D0%B0%D1%82%D0%B8%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D1%96%D1%8E%20%D0%BF%D0%BE%20TikTok%20%D1%96%20%D0%B1%D0%B5%D0%B7%D0%BA%D0%BE%D1%88%D1%82%D0%BE%D0%B2%D0%BD%D0%B8%D0%B9%20%D0%B2%D1%96%D0%B4%D0%B5%D0%BE%D1%83%D1%80%D0%BE%D0%BA" onclick="trackLead(event)">Отримати урок у WhatsApp 💬</a>
-        </div>
+        <p class="copy">Залиш ім'я і номер — я надішлю план і відео-урок у месенджер та запишу на безкоштовну консультацію.</p>
+        <form class="form" id="leadForm" novalidate autocomplete="on">
+          <input class="field" id="name" name="name" type="text" placeholder="Твоє ім'я" autocomplete="given-name" maxlength="40">
+          <div class="row">
+            <select class="field code" id="code" name="code" aria-label="Код країни"></select>
+            <input class="field" id="phone" name="phone" type="tel" inputmode="tel" placeholder="Номер телефону" autocomplete="tel-national" maxlength="16">
+          </div>
+          <input class="hp" id="hp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <p class="msg" id="formMsg" role="alert"></p>
+          <button class="primary" id="submitBtn" type="submit">Отримати план та урок ➡️</button>
+          <p class="note">🔒 Без спаму. Напишу тобі в WhatsApp / Telegram / Viber.</p>
+        </form>
       </section>
 
       <!-- Екран 6: безкоштовний матеріал, без Lead -->
@@ -405,26 +482,35 @@
         <p class="copy">Мої живі розбори зараз закриті. Але я дарую тобі свій урок по TikTok. Почни самостійно!</p>
         <a class="download" href="https://t.me/+ivxcKAd90plkOTE0" target="_blank" rel="noopener">Перейти до безкоштовних порад 🎁</a>
       </section>
+
+      <!-- Екран 7: дякую після форми -->
+      <section class="screen" id="screen7" aria-labelledby="title7">
+        <div class="success-icon" aria-hidden="true">✓</div>
+        <p class="eyebrow">Заявку прийнято</p>
+        <h2 id="title7"><span id="thanksName"></span>, дякую! <span class="accent">Місце за тобою.</span></h2>
+        <ol class="steps">
+          <li><i>1</i><span>Протягом 2 годин я напишу тобі в месенджер на цей номер.</span></li>
+          <li><i>2</i><span>Надішлю твій план і домовимось про час консультації.</span></li>
+          <li><i>3</i><span>А відео-урок можеш забрати вже зараз 👇</span></li>
+        </ol>
+        <a class="download" href="https://t.me/+ivxcKAd90plkOTE0" target="_blank" rel="noopener">Забрати відео-урок у Telegram 🎁</a>
+      </section>
     </main>
 
     <footer class="footer">ПРОСТИЙ ПЛАН · ПЕРШИЙ КРОК</footer>
   </div>
 
   <script>
-    const answers = {
-      goal: '',
-      barrier: '',
-      filter: ''
-    };
+    const answers = { goal: '', barrier: '', filter: '' };
+    const eventId = 'm' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 
-    const progressValues = {
-      1: null,
-      2: 33,
-      3: 66,
-      4: 99,
-      5: null,
-      6: null
-    };
+    const qs = new URLSearchParams(location.search);
+    const utm = {};
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'].forEach(k => {
+      if (qs.get(k)) utm[k] = qs.get(k);
+    });
+
+    const progressValues = { 1: null, 2: 33, 3: 66, 4: 99, 5: null, 6: null, 7: null };
 
     function showScreen(number) {
       document.querySelectorAll('.screen').forEach(screen => {
@@ -450,7 +536,6 @@
       }
     }
 
-    // На екранах 2 і 3 відповідь одразу відкриває наступне питання.
     document.querySelectorAll('[data-answer]').forEach(button => {
       button.addEventListener('click', () => {
         const key = button.dataset.answer;
@@ -459,36 +544,105 @@
       });
     });
 
-    // На екрані 4: перші дві відповіді ведуть до екрана 5, третя — до екрана 6.
     document.querySelectorAll('[data-route]').forEach(button => {
       button.addEventListener('click', () => {
         answers.filter = button.dataset.value;
-
         if (button.dataset.route === 'lead') {
           showScreen(5);
+          setTimeout(() => document.getElementById('name').focus(), 300);
         } else {
-          // Безкоштовний маршрут: подія Lead тут не викликається.
-          showScreen(6);
+          showScreen(6); // безкоштовний маршрут: Lead не викликається
         }
       });
     });
 
-    // Викликається тільки при кліку на Telegram або WhatsApp.
-    function trackLead(event) {
-      event.preventDefault();
-      const destination = event.currentTarget.href;
+    /* ---------- коди країн ---------- */
+    const CODES = [
+      ['+48', '🇵🇱', 'Europe/Warsaw'], ['+49', '🇩🇪', 'Europe/Berlin'], ['+420', '🇨🇿', 'Europe/Prague'],
+      ['+39', '🇮🇹', 'Europe/Rome'], ['+34', '🇪🇸', 'Europe/Madrid'], ['+351', '🇵🇹', 'Europe/Lisbon'],
+      ['+33', '🇫🇷', 'Europe/Paris'], ['+44', '🇬🇧', 'Europe/London'], ['+353', '🇮🇪', 'Europe/Dublin'],
+      ['+31', '🇳🇱', 'Europe/Amsterdam'], ['+32', '🇧🇪', 'Europe/Brussels'], ['+43', '🇦🇹', 'Europe/Vienna'],
+      ['+41', '🇨🇭', 'Europe/Zurich'], ['+45', '🇩🇰', 'Europe/Copenhagen'], ['+46', '🇸🇪', 'Europe/Stockholm'],
+      ['+47', '🇳🇴', 'Europe/Oslo'], ['+358', '🇫🇮', 'Europe/Helsinki'], ['+370', '🇱🇹', 'Europe/Vilnius'],
+      ['+371', '🇱🇻', 'Europe/Riga'], ['+372', '🇪🇪', 'Europe/Tallinn'], ['+421', '🇸🇰', 'Europe/Bratislava'],
+      ['+36', '🇭🇺', 'Europe/Budapest'], ['+40', '🇷🇴', 'Europe/Bucharest'], ['+359', '🇧🇬', 'Europe/Sofia'],
+      ['+30', '🇬🇷', 'Europe/Athens'], ['+356', '🇲🇹', 'Europe/Malta'], ['+357', '🇨🇾', 'Asia/Nicosia'],
+      ['+373', '🇲🇩', 'Europe/Chisinau'], ['+995', '🇬🇪', 'Asia/Tbilisi'], ['+380', '🇺🇦', 'Europe/Kyiv'],
+      ['+1', '🇺🇸', 'America/New_York']
+    ];
+    const userTZ = (Intl.DateTimeFormat().resolvedOptions().timeZone) || '';
+    const codeSel = document.getElementById('code');
+    codeSel.innerHTML = CODES.map(c => `<option value="${c[0]}">${c[1]} ${c[0]}</option>`).join('');
+    const guess = CODES.find(c => c[2] === userTZ || (userTZ === 'Europe/Kiev' && c[0] === '+380'));
+    if (guess) codeSel.value = guess[0];
 
-      if (typeof window.fbq === 'function') {
-        window.fbq('track', 'Lead');
-      }
+    /* ---------- відправка форми ---------- */
+    let sending = false;
+    const form = document.getElementById('leadForm');
+    const nameEl = document.getElementById('name');
+    const phoneEl = document.getElementById('phone');
+    const msgEl = document.getElementById('formMsg');
+    const btn = document.getElementById('submitBtn');
 
-      // Переходимо після короткої паузи, щоб Pixel встиг почати передачу Lead.
-      window.setTimeout(() => {
-        window.location.href = destination;
-      }, 300);
+    [nameEl, phoneEl].forEach(el => el.addEventListener('input', () => el.classList.remove('err')));
+
+    function cookie(n) {
+      const m = document.cookie.match('(?:^|; )' + n + '=([^;]*)');
+      return m ? m[1] : '';
     }
 
-    // Початкові значення доступності екранів.
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (sending) return;
+      if (document.getElementById('hp').value) return;
+
+      const name = nameEl.value.trim();
+      let digits = phoneEl.value.replace(/\D/g, '');
+      const code = codeSel.value;
+      // якщо людина ввела номер уже з кодом країни — не дублюємо код
+      if (digits.startsWith(code.replace('+', '')) && digits.length > 9) digits = digits.slice(code.length - 1);
+      digits = digits.replace(/^0+/, '');
+
+      let ok = true;
+      if (name.length < 2) { nameEl.classList.add('err'); ok = false; }
+      if (digits.length < 6 || digits.length > 13) { phoneEl.classList.add('err'); ok = false; }
+      if (!ok) { msgEl.textContent = 'Заповни, будь ласка, виділені поля'; return; }
+
+      msgEl.textContent = '';
+      sending = true;
+      btn.disabled = true;
+      btn.textContent = 'Надсилаю…';
+
+      const fbc = cookie('_fbc') || (utm.fbclid ? 'fb.1.' + Date.now() + '.' + utm.fbclid : '');
+      const payload = {
+        name, phone: code + digits,
+        goal: answers.goal, barrier: answers.barrier, filter: answers.filter,
+        utm, userTZ, eventId, fbp: cookie('_fbp'), fbc, page: location.href
+      };
+
+      fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true
+      })
+        .then(r => { if (!r.ok) throw new Error('bad'); return r.json(); })
+        .then(() => {
+          // Lead — тільки після того, як заявка реально дійшла в Telegram
+          if (typeof window.fbq === 'function') {
+            window.fbq('track', 'Lead', { content_name: 'tiktok_mentor_quiz' }, { eventID: eventId + '_Lead' });
+          }
+          document.getElementById('thanksName').textContent = name;
+          showScreen(7);
+        })
+        .catch(() => {
+          sending = false;
+          btn.disabled = false;
+          btn.textContent = 'Отримати план та урок ➡️';
+          msgEl.textContent = 'Не вдалося надіслати. Перевір інтернет і спробуй ще раз.';
+        });
+    });
+
     document.querySelectorAll('.screen').forEach((screen, index) => {
       screen.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
     });
