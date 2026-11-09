@@ -252,6 +252,7 @@
       transition: transform .14s ease, filter .16s ease, opacity .16s ease;
     }
 
+    a.primary { text-decoration: none; }
     .primary {
       background: var(--neon);
       color: #080d07;
@@ -347,6 +348,27 @@
       font-weight: 900;
     }
 
+    .plan { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; }
+    .plan li { color: #e7e8e9; font-size: 13px; line-height: 1.3; }
+    .plan li::before { content: "✓ "; color: var(--neon); font-weight: 900; }
+    .plan li b { color: var(--neon); }
+    @media (max-height: 660px) { .plan li:nth-child(3) { display: none; } }
+
+    .proof { margin: 0; color: #e7e8e9; font-size: 12px; line-height: 1.3; }
+    .proof b { color: var(--neon); }
+    .revs { display: grid; gap: 6px; }
+    .rev { display: flex; gap: 10px; align-items: center; padding: 9px 11px;
+      border: 1px solid rgba(57,255,20,.35); border-radius: 12px;
+      background: linear-gradient(90deg, rgba(57,255,20,.07), var(--card) 70%); }
+    .rev .ava { flex: 0 0 38px; width: 38px; height: 38px; border-radius: 50%; object-fit: cover;
+      border: 2px solid var(--neon); }
+    .rev b { display: block; color: var(--white); font-size: 12px; line-height: 1.2; }
+    .rev b::after { content: "  ★★★★★"; color: #ffc83d; font-size: 10px; letter-spacing: 1px; }
+    .rev .res { display: block; margin-top: 2px; color: #d9dbdd; font-size: 12.5px; line-height: 1.3; }
+    .rev em { font-style: normal; color: var(--neon); font-weight: 800; }
+    @media (max-height: 700px) { .revs .rev:nth-child(2) { display: none; } }
+    @media (max-height: 620px) { .revs { display: none; } }
+
     .note {
       margin: 0;
       color: #92979b;
@@ -409,27 +431,30 @@
     <main>
       <!-- Екран 1: старт -->
       <section class="screen active" id="screen1" aria-labelledby="title1">
-        <p class="eyebrow">Твій старт у TikTok</p>
-        <h1 id="title1">Як отримувати клієнтів та партнерів з TikTok у Європі. <span class="accent">Без грошей на рекламу та знання мови.</span></h1>
-        <p class="copy">Покроковий план для тих, хто продає свої товари, послуги або розвиває мережевий бізнес (МЛМ).</p>
+        <p class="eyebrow">Клієнти йдуть не до найкращих, а до тих, кого бачать</p>
+        <h1 id="title1">Перші клієнти з TikTok за 30 днів. <span class="accent">Навіть без підписників.</span></h1>
+        <p class="copy">Покроковий план для майстрів, експертів і тих, хто продає свій товар у Європі.</p>
         <ul class="benefits">
-          <li><span>⚡</span><span>Для новачків: ідеально як підробіток до найму.</span></li>
-          <li><span>⚙️</span><span>0% на рекламу: TikTok сам знайде покупців у вашому місті.</span></li>
-          <li><span>👥</span><span>Супер просто: дам готові тексти, які треба просто зачитати.</span></li>
+          <li><span>🎬</span><span>Не треба бути блогером: дам готові сценарії, які треба просто зачитати.</span></li>
+          <li><span>📱</span><span>Знімаєш на звичайний телефон — без світла, мікрофона і монтажу.</span></li>
+          <li><span>💶</span><span>Без бюджету на рекламу на старті: перші клієнти — з безкоштовних відео.</span></li>
         </ul>
-        <div class="gift">🎁 <strong>БОНУС:</strong> Мій відео-урок «Як налаштувати TikTok, щоб клієнти купували у вас самі».</div>
+        <p class="proof">⭐⭐⭐⭐⭐ <b>105 учнів з 11 країн</b> уже отримують клієнтів з TikTok</p>
+        <div class="gift">🎁 <strong>БОНУС:</strong> Мій відео-урок «Як налаштувати TikTok, щоб клієнти купували у тебе самі».</div>
         <button class="primary" type="button" onclick="step('QuizStart'); showScreen(2)">Отримати мій план та відео-урок ➡️</button>
       </section>
 
       <!-- Екран 2: мета -->
       <section class="screen" id="screen2" aria-labelledby="title2">
         <p class="eyebrow">Питання 1 з 3</p>
-        <h2 id="title2">Яка твоя головна мета в Європі зараз?</h2>
+        <h2 id="title2">Чим ти займаєшся?</h2>
         <div class="choices">
-          <button class="choice" type="button" data-answer="goal" data-value="Запустити додатковий дохід у євро">Запустити додатковий дохід у євро 💶</button>
-          <button class="choice" type="button" data-answer="goal" data-value="Розвивати мережевий бізнес / МЛМ">Розвивати мережевий бізнес / МЛМ 🚀</button>
-          <button class="choice" type="button" data-answer="goal" data-value="Продавати свої послуги або товари">Продавати свої послуги або товари 📦</button>
-          <button class="choice" type="button" data-answer="goal" data-value="Піти з найму/заробітків на фріланс">Піти з найму/заробітків на фріланс 💻</button>
+          <button class="choice" type="button" data-answer="goal" data-value="Послуги (б'юті, майстер, ремонт)">Послуги: б'юті, майстер, фото, ремонт 💅</button>
+          <button class="choice" type="button" data-answer="goal" data-value="Експерт (коуч, психолог, нутриціолог)">Експерт: коуч, психолог, нутриціолог 🧠</button>
+          <button class="choice" type="button" data-answer="goal" data-value="Навчання (мови, репетиторство, курси)">Навчання: мови, репетиторство, курси 📚</button>
+          <button class="choice" type="button" data-answer="goal" data-value="Свій товар (кулінарія, хендмейд)">Свій товар: кулінарія, хендмейд, одяг 🍰</button>
+          <button class="choice" type="button" data-answer="goal" data-value="Мережевий бізнес">Мережевий бізнес 🤝</button>
+          <button class="choice" type="button" data-answer="goal" data-value="Ще шукаю, чим заробляти">Ще шукаю, чим заробляти 🧭</button>
         </div>
       </section>
 
@@ -448,11 +473,11 @@
       <!-- Екран 4: кваліфікаційне питання -->
       <section class="screen" id="screen4" aria-labelledby="title4">
         <p class="eyebrow">Питання 3 з 3</p>
-        <h2 id="title4">На безкоштовній консультації я дам тобі готовий план. Що для тебе важливо далі?</h2>
+        <h2 id="title4">Як ти ставишся до інвестицій у свій розвиток?</h2>
         <div class="choices">
-          <button class="choice" type="button" data-route="lead" data-value="Хочу пройти навчання">Я налаштований(а) серйозно. Хочу пройти навчання з тобою, щоб отримати результат швидше 🚀</button>
-          <button class="choice" type="button" data-route="lead" data-value="Оплата частинами">Мені потрібна допомога та готові кроки, але з оплатою частинами або в розстрочку 💳</button>
-          <button class="choice" type="button" data-route="free" data-value="Лише безкоштовні поради">Я хочу спробувати сам(а) і шукаю лише безкоштовні поради та тексти 📖</button>
+          <button class="choice" type="button" data-route="lead" data-value="Готовий інвестувати">Готова(ий) інвестувати, щоб отримати результат швидше 🚀</button>
+          <button class="choice" type="button" data-route="lead" data-value="Розгляну з розстрочкою">Розгляну, якщо буде розстрочка 💳</button>
+          <button class="choice" type="button" data-route="free" data-value="Лише безкоштовне">Поки шукаю лише безкоштовне 📖</button>
         </div>
       </section>
 
@@ -461,26 +486,32 @@
         <div class="success-icon" aria-hidden="true">✓</div>
         <p class="eyebrow">Готово</p>
         <h2 id="title5">Твій план та відео-урок вже готові!</h2>
-        <p class="copy">Залиш ім'я і номер — я надішлю план і відео-урок у месенджер та запишу на безкоштовну консультацію.</p>
+        <ul class="plan" id="plan"></ul>
+        <p class="copy" id="copy5">Залиш ім'я і номер — надішлю план і урок у месенджер та запишу на безкоштовний розбір. <b class="accent">Цього тижня — 6 місць.</b></p>
         <form class="form" id="leadForm" novalidate autocomplete="on">
           <input class="field" id="name" name="name" type="text" placeholder="Твоє ім'я" autocomplete="given-name" maxlength="40">
           <div class="row">
             <select class="field code" id="code" name="code" aria-label="Код країни"></select>
-            <input class="field" id="phone" name="phone" type="tel" inputmode="tel" placeholder="Номер телефону" autocomplete="tel-national" maxlength="16">
+            <input class="field" id="phone" name="phone" type="tel" inputmode="tel" placeholder="Номер телефону" autocomplete="tel-national" maxlength="22">
           </div>
           <input class="hp" id="hp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
           <p class="msg" id="formMsg" role="alert"></p>
-          <button class="primary" id="submitBtn" type="submit">Отримати план та урок ➡️</button>
+          <button class="primary" id="submitBtn" type="submit">Отримати мій план ➡️</button>
           <p class="note">🔒 Без спаму. Напишу тобі в WhatsApp / Telegram / Viber.</p>
         </form>
+        <div class="revs">
+          <div class="rev"><img class="ava" src="data:image/jpeg;base64,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" alt="Тетяна"><div><b>Тетяна, 54 · лайф-коуч</b><span class="res"><em>2 клієнти по $500</em> з TikTok — за перший місяць</span></div></div>
+          <div class="rev"><img class="ava" src="data:image/jpeg;base64,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" alt="Оксана"><div><b>Оксана, 50 · вчителька мови</b><span class="res"><em>Стабільний потік учнів</em> з TikTok</span></div></div>
+        </div>
       </section>
 
       <!-- Екран 6: безкоштовний матеріал, без Lead -->
       <section class="screen" id="screen6" aria-labelledby="title6">
         <p class="eyebrow">Подарунок для тебе</p>
-        <h2 id="title6">Твій бонус тут!</h2>
-        <p class="copy">Мої живі розбори зараз закриті. Але я дарую тобі свій урок по TikTok. Почни самостійно!</p>
-        <a class="download" href="https://t.me/+ivxcKAd90plkOTE0" target="_blank" rel="noopener">Перейти до безкоштовних порад 🎁</a>
+        <h2 id="title6">Тримай безкоштовний урок 👇</h2>
+        <a class="download" href="https://t.me/+ivxcKAd90plkOTE0" target="_blank" rel="noopener">Забрати урок у Telegram 🎁</a>
+        <p class="copy">А якщо захочеш <b class="accent">план під свою нішу</b> на безкоштовному розборі — залиш номер. Цього тижня — 6 місць.</p>
+        <button class="primary" type="button" id="wantCall">Хочу розбір ➡️</button>
       </section>
 
       <!-- Екран 7: дякую після форми -->
@@ -489,10 +520,11 @@
         <p class="eyebrow">Заявку прийнято</p>
         <h2 id="title7"><span id="thanksName"></span>, дякую! <span class="accent">Місце за тобою.</span></h2>
         <ol class="steps">
-          <li><i>1</i><span>Протягом 2 годин я напишу тобі в месенджер на цей номер.</span></li>
-          <li><i>2</i><span>Надішлю твій план і домовимось про час консультації.</span></li>
-          <li><i>3</i><span>А відео-урок можеш забрати вже зараз 👇</span></li>
+          <li><i>1</i><span>Протягом <b>15 хвилин</b> я напишу тобі в месенджер на цей номер.</span></li>
+          <li><i>2</i><span><b>Збережи мій номер +48 735 184 537</b> — щоб повідомлення не загубилось.</span></li>
+          <li><i>3</i><span id="thanks2">Надішлю твій план і домовимось про час розбору.</span></li>
         </ol>
+        <a class="primary" id="waFirst" href="https://wa.me/48735184537" target="_blank" rel="noopener">Написати першим у WhatsApp 💬</a>
         <a class="download" href="https://t.me/+ivxcKAd90plkOTE0" target="_blank" rel="noopener">Забрати відео-урок у Telegram 🎁</a>
       </section>
     </main>
@@ -560,13 +592,22 @@
         answers.filter = button.dataset.value;
         if (button.dataset.route === 'lead') {
           step('QuizQualified', { goal: answers.goal, barrier: answers.barrier, filter: answers.filter });
+          prepareForm('lead');
           showScreen(5);
           setTimeout(() => document.getElementById('name').focus(), 300);
         } else {
           step('QuizFree', { goal: answers.goal, barrier: answers.barrier });
-          showScreen(6); // безкоштовний маршрут: Lead не викликається
+          showScreen(6); // безкоштовний маршрут: без форми і без Lead — одразу в Telegram-канал
         }
       });
+    });
+
+    // Безкоштовна гілка: передумав → форма розбору (це вже справжній лід)
+    document.getElementById('wantCall').addEventListener('click', () => {
+      answers.filter = 'Безкоштовне → захотів розбір';
+      step('QuizRecovered', { goal: answers.goal, barrier: answers.barrier });
+      prepareForm('lead');
+      showScreen(5);
     });
 
     /* ---------- коди країн ---------- */
@@ -599,6 +640,33 @@
 
     [nameEl, phoneEl].forEach(el => el.addEventListener('input', () => { el.classList.remove('err'); step('FormStart'); }));
 
+    const NICHE = {
+      'Послуги': 'які 3 відео «до / після» зняти першими, щоб пішли записи',
+      'Експерт': 'які 3 відео-відповіді зняти першими, щоб пішли заявки',
+      'Навчання': 'які 3 міні-уроки зняти першими, щоб пішли учні',
+      'Свій товар': 'які 3 відео процесу зняти першими, щоб пішли замовлення',
+      'Мережевий': 'які 3 відео зняти, щоб писали не друзі, а нові люди',
+      'Ще шукаю': 'яку нішу обрати під твій досвід і з яких 3 відео почати'
+    };
+    let mode = 'lead';
+    function prepareForm(m) {
+      mode = m;
+      const key = Object.keys(NICHE).find(k => (answers.goal || '').startsWith(k)) || 'Ще шукаю';
+      const t5 = document.getElementById('title5'), c5 = document.getElementById('copy5'), pl = document.getElementById('plan');
+      if (m === 'free') {
+        t5.textContent = 'Забирай безкоштовний відео-урок';
+        pl.innerHTML = '<li>Урок «Як налаштувати TikTok, щоб клієнти купували самі»</li><li>5 готових сценаріїв під твою нішу</li>';
+        c5.innerHTML = 'Залиш ім\'я і номер — надішлю урок і сценарії в месенджер.';
+        btn.textContent = 'Отримати урок ➡️';
+      } else {
+        t5.textContent = 'Твій план та відео-урок вже готові!';
+        pl.innerHTML = '<li><b>' + NICHE[key].charAt(0).toUpperCase() + NICHE[key].slice(1) + '</b></li>' +
+          '<li>Готові сценарії — просто зачитати на камеру</li>' +
+          '<li>Як переводити перегляди в заявки, а не лайки</li>';
+        btn.textContent = 'Отримати мій план ➡️';
+      }
+    }
+
     function cookie(n) {
       const m = document.cookie.match('(?:^|; )' + n + '=([^;]*)');
       return m ? m[1] : '';
@@ -610,10 +678,26 @@
       if (document.getElementById('hp').value) return;
 
       const name = nameEl.value.trim();
-      let digits = phoneEl.value.replace(/\D/g, '');
-      const code = codeSel.value;
-      // якщо людина ввела номер уже з кодом країни — не дублюємо код
-      if (digits.startsWith(code.replace('+', '')) && digits.length > 9) digits = digits.slice(code.length - 1);
+      const raw = phoneEl.value.trim();
+      let digits = raw.replace(/\D/g, '');
+      let code = codeSel.value;
+      const cc = code.replace('+', '');
+      if (/^(\+|00)/.test(raw)) {
+        // номер введено в міжнародному форматі (+… / 00…) — беремо його як є, навіть якщо країна інша
+        digits = digits.replace(/^00/, '');
+        const own = CODES.map(c => c[0].slice(1)).sort((a, b) => b.length - a.length).find(c => digits.startsWith(c));
+        if (own) { code = '+' + own; digits = digits.slice(own.length); }
+        else { code = '+' + digits.slice(0, 3); digits = digits.slice(3); } // країни, якої немає у списку
+      } else if (digits.startsWith(cc) && digits.length >= cc.length + 9) {
+        // ввели код без «+» (напр. 48735…) — не дублюємо; коротші номери (італійські 39x…) не чіпаємо
+        digits = digits.slice(cc.length);
+      } else if (/^380\d{9}$/.test(digits)) {
+        // український номер з кодом без «+» (380…), хоча обрана інша країна
+        code = '+380'; digits = digits.slice(3);
+      } else if (code !== '+380' && code !== '+33' && /^0(39|50|63|66|67|68|73|89|9[1-9])\d{7}$/.test(digits)) {
+        // український мобільний у місцевому форматі 0XX… (людина за кордоном з українським номером)
+        code = '+380';
+      }
       digits = digits.replace(/^0+/, '');
 
       let ok = true;
@@ -643,15 +727,29 @@
         .then(() => {
           // Lead — тільки після того, як заявка реально дійшла в Telegram
           if (typeof window.fbq === 'function') {
-            window.fbq('track', 'Lead', { content_name: 'tiktok_mentor_quiz' }, { eventID: eventId + '_Lead' });
+            // Покращене зіставлення: піксель сам хешує ці дані перед відправкою
+            try {
+              window.fbq('init', '1826437471820230', {
+                ph: (code + digits).replace(/\D/g, ''),
+                fn: name.split(' ')[0].toLowerCase()
+              });
+            } catch (e) {}
+            if (answers.filter === 'Безкоштовне → захотів розбір') {
+              // Обрали «безкоштовне», потім залишили номер — НЕ Lead, щоб реклама вчилась лише на готових інвестувати
+              window.fbq('trackCustom', 'FreeToCall', { content_name: 'tiktok_mentor_quiz' }, { eventID: eventId + '_FreeToCall' });
+            } else {
+              window.fbq('track', 'Lead', { content_name: 'tiktok_mentor_quiz' }, { eventID: eventId + '_Lead' });
+            }
           }
           document.getElementById('thanksName').textContent = name;
+          document.getElementById('waFirst').href = 'https://wa.me/48735184537?text=' +
+            encodeURIComponent('Привіт, Віталію! Це ' + name + ' з квізу. Хочу свій план по TikTok 🙌');
           showScreen(7);
         })
         .catch(() => {
           sending = false;
           btn.disabled = false;
-          btn.textContent = 'Отримати план та урок ➡️';
+          btn.textContent = mode === 'free' ? 'Отримати урок ➡️' : 'Отримати мій план ➡️';
           msgEl.textContent = 'Не вдалося надіслати. Перевір інтернет і спробуй ще раз.';
         });
     });
